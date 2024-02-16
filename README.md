@@ -1,5 +1,5 @@
 # cdn
 
-https://cdn-vxw.pages.dev/bucher-tax/blog.js
+https://cdn.komunique.com/bucher-tax/blog.js
 
-<script src="https://cdn-vxw.pages.dev/{folder}/{file}" async></script>
+<script src="https://cdn.komunique.com/{folder}/{file}" async></script>
