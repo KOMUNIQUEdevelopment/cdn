@@ -1,9 +1,7 @@
-// lenis-setup.js
-
-// Initialize Lenis function
+// LENIS SMOOTH SCROLL
+let lenis;
 function initializeLenis() {
-  let lenis;
-  if (typeof Webflow === 'undefined' || Webflow.env("editor") === undefined) {
+  if (Webflow.env("editor") === undefined) {
     lenis = new Lenis({
       lerp: 0.1,
       wheelMultiplier: 0.7,
@@ -26,36 +24,29 @@ function initializeLenis() {
     requestAnimationFrame(raf);
   }
 
-  // Event listeners for Lenis control
-  document.querySelectorAll("[data-lenis-start]").forEach(element => {
-    element.addEventListener("click", function () {
-      if (lenis) {
-        lenis.start();
-      }
-    });
+  $("[data-lenis-start]").on("click", function () {
+    if (lenis) {
+      lenis.start();
+    }
   });
 
-  document.querySelectorAll("[data-lenis-stop]").forEach(element => {
-    element.addEventListener("click", function () {
+  $("[data-lenis-stop]").on("click", function () {
+    if (lenis) {
+      lenis.stop();
+    }
+  });
+
+  $("[data-lenis-toggle]").on("click", function () {
+    $(this).toggleClass("stop-scroll");
+    if ($(this).hasClass("stop-scroll")) {
       if (lenis) {
         lenis.stop();
       }
-    });
-  });
-
-  document.querySelectorAll("[data-lenis-toggle]").forEach(element => {
-    element.addEventListener("click", function () {
-      this.classList.toggle("stop-scroll");
-      if (this.classList.contains("stop-scroll")) {
-        if (lenis) {
-          lenis.stop();
-        }
-      } else {
-        if (lenis) {
-          lenis.start();
-        }
+    } else {
+      if (lenis) {
+        lenis.start();
       }
-    });
+    }
   });
 
   // Listen for Feedbucket feature open and close events
