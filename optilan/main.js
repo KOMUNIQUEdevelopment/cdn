@@ -83,3 +83,56 @@ document.head.appendChild(style);
 
 // Initialize Lenis after DOM content is loaded
 document.addEventListener('DOMContentLoaded', initializeLenis);
+
+
+//remove anchor hashtags from URL
+$(document).ready(function() {
+    
+    // Function to remove the anchor
+    function removeAnchor() {
+        history.replaceState("", document.title, window.location.origin + window.location.pathname + window.location.search);
+    }
+
+    // Remove the anchor on page load
+    removeAnchor();
+
+    // Remove the anchor on clicking elements with anchor="remove"
+    $("[anchor='remove']").click(() => {
+        setTimeout(removeAnchor, 5);
+    });
+});
+
+
+$(document).ready(function() {
+
+  function updateLinkDisplay() {
+    // Reset styles for all anchors
+    $('nav a .is-current').addClass('hide');
+    $('nav a .isnot-current').removeClass('hide');
+  
+    // Set styles for each current anchor
+    $('.w--current').each(function() {
+      $(this).find('.is-current').removeClass('hide');
+      $(this).find('.isnot-current').addClass('hide');
+    });
+  }
+
+  // Run the update function when scrolling
+  $(document).scroll(function() {
+    updateLinkDisplay();
+  });
+
+  // Run the function on initial load
+  updateLinkDisplay();
+});
+
+// auto update copyright year
+// when the DOM is ready
+document.addEventListener("DOMContentLoaded", function() { 
+  // get the the span element
+  const yrSpan = document.querySelector('.copyright-year');
+  // get the current year
+  const currentYr = new Date().getFullYear();
+  // set the year span element's text to the current year
+  yrSpan.textContent = currentYr;
+});
